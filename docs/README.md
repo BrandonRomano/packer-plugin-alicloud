@@ -1,16 +1,46 @@
-# Alicloud Plugins
+The Alicloud plugin can be used to create or import custom images on on the Alibaba Cloud platform.
 
-<!--
-  Include a short overview about the plugin.
+### Example Usage
+Packer 1.7.0 and later
 
-  This document is a great location for creating a table of contents for each
-  of the components the plugin may provide. This document should load automatically
-  when navigating to the docs directory for a plugin.
+---
 
--->
+```
+packer {
+  required_plugins {
+    amazon = {
+      version = ">= 1.0.0"
+      source = "github.com/hashicorp/amazon"
+    }
+  }
+}
 
-The Alicloud plugin is intended as a starting point for creating Packer plugins, containing:
+source "alicloud-ecs" "basic-example" {
+      access_key = var.access_key
+      secret_key = var.secret_key
+      region = "cn-beijing"
+      image_name = "packer_test2"
+      source_image = "centos_7_04_64_20G_alibase_201701015.vhd"
+      ssh_username = "root"
+      instance_type = "ecs.n1.tiny"
+      io_optimized = true
+      internet_charge_type = "PayByTraffic"
+      image_force_delete = true
+      run_tags  = {
+        "Built by"   = "Packer"
+        "Managed by" = "Packer"
+      }
+}
 
-- [alicloud-ecs builder](/docs/builders/alicloud-ecs.mdx) - provides the capability to build customized images based on an existing base image.
+build {
+  sources = ["sources.alicloud-ecs.basic-example"]
+}
+```
 
-- [alicloud-import post-processor](/docs/post-processors/alicloud-import.mdx) - Takes a RAW or VHD artifact from various builders and imports it to an Alicloud ECS Image.
+### Available Components
+
+**Builders**
+- [alicloud-ecs](/packer/integrations/hashicorp/alicloud-ecs) - Provides the capability to build customized images based on an existing base image.
+
+**Post-Processors**
+- [alicloud-import](/packer/integrations/hashicorp/alicloud-import) - Takes a RAW or VHD artifact from various builders and imports it to an Alicloud ECS Image.
