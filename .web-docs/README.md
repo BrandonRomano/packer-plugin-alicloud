@@ -7,8 +7,8 @@ Packer 1.7.0 and later
 packer {
   required_plugins {
     alicloud = {
-      version = ">= 1.0.0"
-      source = "github.com/hashicorp/alicloud"
+      source  = "github.com/hashicorp/alicloud"
+      version = "~> 1"
     }
   }
 }
