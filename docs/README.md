@@ -1,4 +1,4 @@
-The Alicloud plugin can be used to create or import custom images on on the Alibaba Cloud platform.
+The Alicloud plugin can be used to create or import custom images on the Alibaba Cloud platform.
 
 ### Installation
 
